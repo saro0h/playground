@@ -28,6 +28,7 @@ class DemoController extends Controller
      */
     public function helloAction($name)
     {
+        var_dump($this->container->getParameter('max_per_page'));
         return array('name' => $name);
     }
 

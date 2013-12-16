@@ -15,7 +15,7 @@ class AcmeDemoExtension extends Extension
     {
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
-        $container->setParameter('acme_blog', $config['acme_blog']);
+        $container->setParameter('max_per_page', $config['max_per_page']);
 
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.xml');

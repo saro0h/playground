@@ -4,8 +4,10 @@ namespace Playground\DemoBundle\EventListener;
 
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\HttpKernel\KernelEvents;
 
-class OpenHoursListener
+class OpenHoursListener implements EventSubscriberInterface
 {
     private $openHour;
     private $closeHour;
@@ -28,5 +30,12 @@ class OpenHoursListener
             // setting a response stops the propagation of the kernel.request event
             $event->setResponse(new Response('Sorry the website is now closed.'));
         }
+    }
+
+    public static function getSubscribedEvents()
+    {
+        return array(
+            KernelEvents::REQUEST => array('onKernelRequest', 255),
+        );
     }
 }

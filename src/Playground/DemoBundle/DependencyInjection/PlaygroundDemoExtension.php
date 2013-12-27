@@ -5,8 +5,8 @@ namespace Playground\DemoBundle\DependencyInjection;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
+use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\DependencyInjection\Loader;
-
 
 class PlaygroundDemoExtension extends Extension
 {
@@ -19,6 +19,10 @@ class PlaygroundDemoExtension extends Extension
         $loader->load('services.xml');
 
         $definition = $container->findDefinition('playground_demo.open_hours_listener');
-        $definition->setArguments(array($config['open_hour'], $config['close_hour']));
+        $definition->setArguments(array(
+        	$config['open_hour'], 
+        	$config['close_hour'], 
+        	new Reference('event_dispatcher'),
+        ));
     }
 }

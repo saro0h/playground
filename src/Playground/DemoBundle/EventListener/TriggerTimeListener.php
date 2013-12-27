@@ -17,7 +17,7 @@ class TriggerTimeListener implements EventSubscriberInterface
 
 	public function onTriggerTime(TriggerTimeEvent $event)
 	{
-		$this->logger->info('The website is about to close in less than 30 minutes', array(
+		$this->logger->info('The website is about to close in less than 1 day', array(
 			'triggerTime' => $event->getTriggeredTime()
 		));
 	}

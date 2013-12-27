@@ -73,3 +73,7 @@ acme_demo:
     max_per_page:        10
     active_categories:   programming
     main_category:       internet
+
+playground_demo:
+    open_hour: 8
+    close_hour: 18

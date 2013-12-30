@@ -18,10 +18,10 @@ class PlaygroundDemoExtension extends Extension
         $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.xml');
 
-        $definition = $container->findDefinition('playground_demo.open_hours_listener');
+        $definition = $container->findDefinition('playground_demo.open_days_listener');
         $definition->setArguments(array(
-        	$config['open_hour'], 
-        	$config['close_hour'], 
+        	$config['open_day'], 
+        	$config['close_day'], 
         	new Reference('event_dispatcher'),
         ));
     }

@@ -31,7 +31,7 @@ class OpenDaysListener implements EventSubscriberInterface
         }
 
         if ($this->currentDay === ($this->closeDay-1)) {
-            $this->dispatcher->dispatch(TriggerTimeEvent::TRIGGER_TIME, new TriggerTimeEvent(time()));
+            $this->dispatcher->dispatch(TriggerTimeEvent::TRIGGER_TIME, new TriggerTimeEvent(new \DateTime()));
         }
 
         if ($this->currentDay < $this->openDay || $this->currentDay > $this->closeDay) {

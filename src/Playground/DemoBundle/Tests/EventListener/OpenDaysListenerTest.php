@@ -2,9 +2,9 @@
 
 namespace Playground\DemoBundle\Tests\EventListener;
 
-use Playground\DemoBundle\EventListener\OpenHoursListener;
+use Playground\DemoBundle\EventListener\OpenDaysListener;
 
-class OpenHoursListenerTest extends \PHPUnit_Framework_TestCase
+class OpenDaysListenerTest extends \PHPUnit_Framework_TestCase
 {
     private $event;
     private $dispatcher;
@@ -19,7 +19,7 @@ class OpenHoursListenerTest extends \PHPUnit_Framework_TestCase
         $this->event->expects($this->never())->method('setResponse');
         $this->dispatcher->expects($this->never())->method('dispatch');
 
-        $listener = new OpenHoursListener(8, 18, $this->dispatcher);
+        $listener = new OpenDaysListener(8, 18, $this->dispatcher);
 
         $listener->onKernelRequest($this->event);
     }
@@ -35,7 +35,7 @@ class OpenHoursListenerTest extends \PHPUnit_Framework_TestCase
         $this->event->expects($this->never())->method('setResponse');
         $this->dispatcher->expects($this->never())->method('dispatch');
 
-        $listener = new OpenHoursListener(0, 6, $this->dispatcher);
+        $listener = new OpenDaysListener(0, 6, $this->dispatcher);
         $listener->setCurrentDay(4);
 
         $listener->onKernelRequest($this->event);
@@ -52,7 +52,7 @@ class OpenHoursListenerTest extends \PHPUnit_Framework_TestCase
         $this->event->expects($this->once())->method('setResponse');
         $this->dispatcher->expects($this->never())->method('dispatch');
 
-        $listener = new OpenHoursListener(0, 5, $this->dispatcher);
+        $listener = new OpenDaysListener(0, 5, $this->dispatcher);
         $listener->setCurrentDay(6);
 
         $listener->onKernelRequest($this->event);
@@ -68,7 +68,7 @@ class OpenHoursListenerTest extends \PHPUnit_Framework_TestCase
 
         $this->dispatcher->expects($this->once())->method('dispatch');
 
-        $listener = new OpenHoursListener(0, 5, $this->dispatcher);
+        $listener = new OpenDaysListener(0, 5, $this->dispatcher);
         $listener->setCurrentDay(4);
 
         $listener->onKernelRequest($this->event);

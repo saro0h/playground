@@ -9,17 +9,19 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Playground\DemoBundle\Event\TriggerTimeEvent;
 
-class OpenHoursListener implements EventSubscriberInterface
+class OpenDaysListener implements EventSubscriberInterface
 {
-    private $openHour;
-    private $closeHour;
+    private $openDay;
+    private $closeDay;
     private $dispatcher;
+    private $currentDay;
 
-    public function __construct($openHour, $closeHour, EventDispatcherInterface $dispatcher)
+    public function __construct($openDay, $closeDay, EventDispatcherInterface $dispatcher)
     {
-        $this->openHour = $openHour;
-        $this->closeHour = $closeHour;
+        $this->openDay = $openDay;
+        $this->closeDay = $closeDay;
         $this->dispatcher = $dispatcher;
+        $this->setCurrentDay(date('w'));
     }
 
     public function onKernelRequest(GetResponseEvent $event)
@@ -28,27 +30,19 @@ class OpenHoursListener implements EventSubscriberInterface
             return;
         }
 
-        $this->dispatchTriggerTime($this->closeHour);
-
-        $currentDate = date('Y-m-d');
-        $currentTime = date('H:i');
-        $maxTime = date($this->closeHour.':00');
-
-        $dt1 = new \Datetime($currentDate.' '.$currentTime);
-        $dt2 = new \Datetime($currentDate.' '.$maxTime);
-
-        $diff = abs($dt1->format('U') - $dt2->format('U'));
-
-        if (($diff/60) <= 30) {
+        if ($this->currentDay === ($this->closeDay-1)) {
             $this->dispatcher->dispatch(TriggerTimeEvent::TRIGGER_TIME, new TriggerTimeEvent(time()));
         }
 
-        $currentHour = date('H');
-        if ($currentHour < $this->openHour || $currentHour > $this->closeHour) {
-
+        if ($this->currentDay < $this->openDay || $this->currentDay > $this->closeDay) {
             // setting a response stops the propagation of the kernel.request event
             $event->setResponse(new Response('Sorry the website is now closed.'));
         }
+    }
+
+    public function setCurrentDay($day)
+    {
+        $this->currentDay = $day;
     }
 
     public static function getSubscribedEvents()

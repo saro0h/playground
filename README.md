@@ -13,5 +13,6 @@ Here is a Symfony Standard edition (2.4) to begin with.
 
 Enjoy!
 
-Kata 1: DataTransformer https://github.com/poledev/Katas/tree/kata-data-transformers
+- Kata 1: (Form) DataTransformer https://github.com/poledev/Katas/tree/kata-data-transformers
+- Kata 2: (EventDispatcher) Event Listener / Event Dispatcher https://github.com/poledev/Katas/tree/kata-event-listener
 

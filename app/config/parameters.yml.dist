@@ -17,3 +17,6 @@ parameters:
     debug_toolbar:          true
     debug_redirects:        false
     use_assetic_controller: true
+
+    client_id: your_application_client_id
+    client_secret: your_application_client_secret

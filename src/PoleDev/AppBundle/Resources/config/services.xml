@@ -1,0 +1,44 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="github.client" class="%guzzle.client.class%">
+            <argument>https://github.com/</argument>
+            <call method="setDefaultOption">
+                <argument>headers</argument>
+                <argument type="collection">
+                    <argument key="Accept">application/json</argument>
+                </argument>
+            </call>
+            <tag name="guzzle.client"/>
+        </service>
+
+        <service id="api.github.client" class="%guzzle.client.class%">
+            <argument>https://api.github.com/</argument>
+            <call method="setDefaultOption">
+                <argument>headers</argument>
+                <argument type="collection">
+                    <argument key="Accept">application/json</argument>
+                </argument>
+            </call>
+            <tag name="guzzle.client"/>
+        </service>
+
+        <service id="oauth.authenticator.github" class="PoleDev\AppBundle\Security\GithubAuthenticator">
+            <argument type="service" id="github.client" />
+            <argument type="service" id="router" />
+            <argument type="service" id="logger" />
+            <argument>%client_id%</argument>
+            <argument>%client_secret%</argument>
+        </service>
+
+        <service id="oauth.provider.github" class="PoleDev\AppBundle\Security\GithubProvider">
+            <argument type="service" id="api.github.client" />
+            <argument type="service" id="logger" />
+        </service>
+    </services>
+
+</container>

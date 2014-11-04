@@ -1,12 +1,14 @@
 security:
     providers:
-        in_memory:
-            memory: ~
+        github:
+            id: oauth.provider.github
 
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
 
-        default:
-            anonymous: ~
+        secured_area:
+            pattern: ^/admin
+            simple_preauth:
+                authenticator: oauth.authenticator.github

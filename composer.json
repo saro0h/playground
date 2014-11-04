@@ -1,14 +1,14 @@
 {
-    "name": "symfony/framework-standard-edition",
+    "name": "poledev/kata-oauth-authentication",
     "license": "MIT",
     "type": "project",
-    "description": "The \"Symfony Standard Edition\" distribution",
+    "description": "An exemple of application using the Github oauthentication thanks to the SimplePreAuthenticatorInterface.",
     "autoload": {
         "psr-0": { "": "src/", "SymfonyStandard": "app/" }
     },
     "require": {
         "php": ">=5.3.3",
-        "symfony/symfony": "~2.5",
+        "symfony/symfony": "2.5.6",
         "doctrine/orm": "~2.2,>=2.2.3",
         "doctrine/doctrine-bundle": "~1.2",
         "twig/extensions": "~1.0",
@@ -17,7 +17,8 @@
         "symfony/monolog-bundle": "~2.4",
         "sensio/distribution-bundle": "3.0.*@dev",
         "sensio/framework-extra-bundle": "~3.0",
-        "incenteev/composer-parameter-handler": "~2.0"
+        "incenteev/composer-parameter-handler": "~2.0",
+        "misd/guzzle-bundle": "1.1.4"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"
@@ -51,9 +52,6 @@
         "symfony-web-dir": "web",
         "incenteev-parameters": {
             "file": "app/config/parameters.yml"
-        },
-        "branch-alias": {
-            "dev-master": "2.6-dev"
         }
     }
 }

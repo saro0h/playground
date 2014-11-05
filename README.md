@@ -19,7 +19,7 @@ Kata Authentication with Oauth
 ----------------------
 
 1/ Get the Guzzle / Buzz Bundle of your choice (I chose the famous ``"misd/guzzle-bundle": "1.1.4"`` allowing me to
-create services as clients for the usefull endpoint ).
+create services as clients for the usefull endpoint https://github.com/poledev/Katas/blob/kata-authentication/src/PoleDev/AppBundle/Resources/config/services.xml#L8-L28).
 
 ----------------------
 

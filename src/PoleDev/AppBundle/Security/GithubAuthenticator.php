@@ -45,7 +45,7 @@ class GithubAuthenticator implements SimplePreAuthenticatorInterface, Authentica
         $data = $response->json();
 
         /* See all information coming from Github */
-        // var_dump($data);
+        /** var_dump($data) **/
 
         if (isset($data['error'])) {
             $message = sprintf('An error occured during authentication with Github. (%s)', $data['error_description']);

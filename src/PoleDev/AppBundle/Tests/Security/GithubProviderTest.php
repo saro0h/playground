@@ -69,6 +69,7 @@ class GithubProviderTest extends \PHPUnit_Framework_TestCase
 
     public function tearDown()
     {
+        $this->prophet->checkPredictions();
         $this->prophet = null;
     }
 }
